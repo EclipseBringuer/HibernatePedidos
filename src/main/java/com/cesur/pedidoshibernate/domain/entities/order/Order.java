@@ -65,4 +65,15 @@ public class Order implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", date='" + date + '\'' +
+                ", price=" + price +
+                ", user=" + user.getName() +
+                '}';
+    }
 }
