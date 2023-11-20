@@ -7,8 +7,10 @@ module com.cesur.pedidoshibernate {
     requires java.sql;
 
 
+    opens com.cesur.pedidoshibernate.controllers to javafx.fxml;
     opens com.cesur.pedidoshibernate to javafx.fxml;
+    opens com.cesur.pedidoshibernate.domain.entities.user;
+
     exports com.cesur.pedidoshibernate;
     exports com.cesur.pedidoshibernate.controllers;
-    opens com.cesur.pedidoshibernate.controllers to javafx.fxml;
 }
