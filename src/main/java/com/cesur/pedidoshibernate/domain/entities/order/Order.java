@@ -91,4 +91,13 @@ public class Order implements Serializable {
                 ", items=" + items +
                 '}';
     }
+
+    public static void merge(Order origen, Order destino) {
+        destino.setCode(origen.getCode());
+        destino.setDate(origen.getDate());
+        destino.setId(origen.getId());
+        destino.setUser(origen.getUser());
+        destino.setPrice(origen.getPrice());
+        destino.setItems(origen.getItems());
+    }
 }
