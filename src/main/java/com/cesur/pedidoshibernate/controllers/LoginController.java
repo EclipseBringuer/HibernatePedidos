@@ -1,9 +1,9 @@
-package com.cesur.pedidoshibernate;
+package com.cesur.pedidoshibernate.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class LoginController {
     @FXML
     private Label welcomeText;
 
