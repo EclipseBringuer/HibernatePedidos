@@ -12,9 +12,10 @@ public class HibernateUtil {
             Configuration cfg = new Configuration();
             cfg.configure();
             sf = cfg.buildSessionFactory();
+            System.out.println("SESSION FACTORY CREADO CON EXITO");
 
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("ERROR: " + e.getMessage());
         }
 
     }
