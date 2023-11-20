@@ -1,9 +1,12 @@
 package com.cesur.pedidoshibernate.domain.entities.order;
 
+import com.cesur.pedidoshibernate.domain.entities.item.Item;
 import com.cesur.pedidoshibernate.domain.entities.user.User;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido")
@@ -25,6 +28,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private User user;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    private List<Item> items = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -66,6 +72,14 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -74,6 +88,7 @@ public class Order implements Serializable {
                 ", date='" + date + '\'' +
                 ", price=" + price +
                 ", user=" + user.getName() +
+                ", items=" + items +
                 '}';
     }
 }

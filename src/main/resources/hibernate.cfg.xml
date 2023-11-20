@@ -18,6 +18,7 @@
 
         <mapping class="com.cesur.pedidoshibernate.domain.entities.user.User"/>
         <mapping class="com.cesur.pedidoshibernate.domain.entities.order.Order"/>
+        <mapping class="com.cesur.pedidoshibernate.domain.entities.item.Item"/>
     </session-factory>
 
 </hibernate-configuration>

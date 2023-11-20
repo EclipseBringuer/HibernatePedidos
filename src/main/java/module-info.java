@@ -11,6 +11,8 @@ module com.cesur.pedidoshibernate {
     opens com.cesur.pedidoshibernate to javafx.fxml;
     opens com.cesur.pedidoshibernate.domain.entities.user;
     opens com.cesur.pedidoshibernate.domain.entities.order;
+    opens com.cesur.pedidoshibernate.domain.entities.item;
+    opens com.cesur.pedidoshibernate.domain.entities.product;
 
     exports com.cesur.pedidoshibernate;
     exports com.cesur.pedidoshibernate.controllers;
