@@ -4,22 +4,37 @@ import com.cesur.pedidoshibernate.domain.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class App extends Application {
+    private static Stage myStage;
     @Override
     public void start(Stage stage) throws IOException {
+        myStage = stage;
         System.out.println(HibernateUtil.getSessionFactory());
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        myStage.setTitle("CholloGaming");
+        myStage.setMaximized(true);
+        myStage.setScene(scene);
+        myStage.show();
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static void changeSecene(String fxml) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml));
+            Pane newPanel = fxmlLoader.load();
+            myStage.getScene().setRoot(newPanel);
+            myStage.setMaximized(true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
