@@ -1,6 +1,8 @@
 package com.cesur.pedidoshibernate;
 
 import com.cesur.pedidoshibernate.domain.HibernateUtil;
+import com.cesur.pedidoshibernate.domain.entities.user.User;
+import com.cesur.pedidoshibernate.domain.entities.user.UserDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +17,9 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         myStage = stage;
         System.out.println(HibernateUtil.getSessionFactory());
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.validateUser("gabrielrl2004@gmail.com","15112004");
+        System.out.println(user);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         myStage.setTitle("CholloGaming");
