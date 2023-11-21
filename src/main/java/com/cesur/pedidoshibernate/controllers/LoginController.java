@@ -8,10 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +31,11 @@ public class LoginController implements Initializable {
         var userDAO = new UserDAO();
         User user = userDAO.validateUser(txtCorreo.getText(),txtPass.getText());
         if (user == null) {
-            info.setText("Usuario o contraseña incorrecto");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error al iniciar sesión");
+            alert.setHeaderText("Usuario o contraseña incorrecto");
+            alert.setContentText("Pulsa aceptar para volver");
+            alert.showAndWait();
         } else {
             Session.setCurrentUser(user);
             App.changeScene("main-view.fxml");
