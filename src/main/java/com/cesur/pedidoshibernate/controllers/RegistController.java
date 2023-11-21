@@ -29,7 +29,7 @@ public class RegistController implements Initializable {
 
     @javafx.fxml.FXML
     public void volver(ActionEvent actionEvent) {
-        App.changeSecene("login-view.fxml");
+        App.changeScene("login-view.fxml");
     }
 
     @javafx.fxml.FXML
@@ -44,7 +44,7 @@ public class RegistController implements Initializable {
                 try {
                     User salida = userDAO.save(user);
                     if (salida != null) {
-                        App.changeSecene("login-view.fxml");
+                        App.changeScene("login-view.fxml");
                     } else {
                         info.setText("Error, fallo al registrate");
                     }

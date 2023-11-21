@@ -37,13 +37,13 @@ public class LoginController implements Initializable {
             info.setText("Usuario o contraseña incorrecto");
         } else {
             Session.setCurrentUser(user);
-            App.changeSecene("main-view.fxml");
+            App.changeScene("main-view.fxml");
         }
     }
 
     @FXML
     public void cargarRegistro(Event event) {
-        App.changeSecene("regist-view.fxml");
+        App.changeScene("regist-view.fxml");
     }
 
     @Override

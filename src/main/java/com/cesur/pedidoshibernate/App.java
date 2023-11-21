@@ -32,7 +32,7 @@ public class App extends Application {
         launch();
     }
 
-    public static void changeSecene(String fxml) {
+    public static void changeScene(String fxml) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml));
             Pane newPanel = fxmlLoader.load();
