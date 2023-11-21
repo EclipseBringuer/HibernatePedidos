@@ -3,6 +3,7 @@ package com.cesur.pedidoshibernate.domain.entities.user;
 import com.cesur.pedidoshibernate.domain.DAO;
 import com.cesur.pedidoshibernate.domain.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
@@ -20,7 +21,16 @@ public class UserDAO implements DAO<User> {
 
     @Override
     public User save(User data) {
-        return null;
+        User salida = null;
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction t = s.beginTransaction();
+            s.persist(data);
+            t.commit();
+            salida = data;
+        } catch (Exception e) {
+            System.out.println("Fallo al guardar: " + e.getMessage());
+        }
+        return salida;
     }
 
     @Override
