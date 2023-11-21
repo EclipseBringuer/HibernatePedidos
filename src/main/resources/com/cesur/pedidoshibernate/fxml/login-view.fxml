@@ -13,7 +13,7 @@
 <BorderPane styleClass="fondo" stylesheets="@../../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cesur.pedidoshibernate.controllers.LoginController">
     <center>
         <VBox alignment="CENTER" maxHeight="450.0" maxWidth="325.0" spacing="30.0" styleClass="carta">
-            <Label fx:id="info" contentDisplay="CENTER" text="Iniciar Sesión" textAlignment="CENTER">
+            <Label contentDisplay="CENTER" text="Iniciar Sesión" textAlignment="CENTER">
                 <font>
                     <Font name="System Bold" size="20.0" />
                 </font>

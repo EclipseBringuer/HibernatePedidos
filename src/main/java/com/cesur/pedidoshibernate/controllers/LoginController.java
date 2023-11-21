@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML
-    private Label info;
-    @FXML
     private TextField txtCorreo;
     @FXML
     private PasswordField txtPass;
