@@ -52,9 +52,9 @@ public class UserDAO implements DAO<User> {
             q.setParameter("em", email);
             q.setParameter("pass", password);
 
-            try{
+            try {
                 result = q.getSingleResult();
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }

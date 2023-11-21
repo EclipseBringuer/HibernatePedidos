@@ -27,7 +27,7 @@ public class LoginController implements Initializable {
     @FXML
     public void logear(ActionEvent actionEvent) {
         var userDAO = new UserDAO();
-        User user = userDAO.validateUser(txtCorreo.getText(),txtPass.getText());
+        User user = userDAO.validateUser(txtCorreo.getText(), txtPass.getText());
         if (user == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error al iniciar sesión");

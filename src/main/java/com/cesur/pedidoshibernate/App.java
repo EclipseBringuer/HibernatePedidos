@@ -13,12 +13,13 @@ import java.io.IOException;
 
 public class App extends Application {
     private static Stage myStage;
+
     @Override
     public void start(Stage stage) throws IOException {
         myStage = stage;
         System.out.println(HibernateUtil.getSessionFactory());
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.validateUser("gabrielrl2004@gmail.com","15112004");
+        User user = userDAO.validateUser("gabrielrl2004@gmail.com", "15112004");
         System.out.println(user);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
