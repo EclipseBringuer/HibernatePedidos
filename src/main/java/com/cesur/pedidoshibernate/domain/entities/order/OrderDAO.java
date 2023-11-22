@@ -1,12 +1,11 @@
 package com.cesur.pedidoshibernate.domain.entities.order;
 
 import com.cesur.pedidoshibernate.domain.DAO;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO implements DAO<Order> {
     @Override
-    public ArrayList<Order> getAll() {
+    public List<Order> getAll() {
         return null;
     }
 

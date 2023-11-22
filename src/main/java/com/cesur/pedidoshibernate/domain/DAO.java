@@ -1,6 +1,6 @@
 package com.cesur.pedidoshibernate.domain;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DAO general para todas las clases
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface DAO<T> {
 
-    public ArrayList<T> getAll();
+    public List<T> getAll();
 
     public T get(Long id);
 

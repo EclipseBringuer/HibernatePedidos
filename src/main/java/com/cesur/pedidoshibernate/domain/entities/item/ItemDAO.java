@@ -1,12 +1,11 @@
 package com.cesur.pedidoshibernate.domain.entities.item;
 
 import com.cesur.pedidoshibernate.domain.DAO;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemDAO implements DAO<Item> {
     @Override
-    public ArrayList<Item> getAll() {
+    public List<Item> getAll() {
         return null;
     }
 

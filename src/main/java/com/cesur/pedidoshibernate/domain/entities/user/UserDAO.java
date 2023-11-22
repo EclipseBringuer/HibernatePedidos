@@ -5,12 +5,11 @@ import com.cesur.pedidoshibernate.domain.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements DAO<User> {
     @Override
-    public ArrayList<User> getAll() {
+    public List<User> getAll() {
         return null;
     }
 
