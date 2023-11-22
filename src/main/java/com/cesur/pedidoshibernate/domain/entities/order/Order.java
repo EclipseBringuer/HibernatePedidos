@@ -29,7 +29,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_usuario")
     private User user;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
 
     public Integer getId() {

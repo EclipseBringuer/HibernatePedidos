@@ -4,14 +4,16 @@ import com.cesur.pedidoshibernate.App;
 import com.cesur.pedidoshibernate.Session;
 import com.cesur.pedidoshibernate.domain.entities.item.Item;
 import com.cesur.pedidoshibernate.domain.entities.order.Order;
+import com.cesur.pedidoshibernate.domain.entities.order.OrderDAO;
+import com.cesur.pedidoshibernate.domain.entities.product.Product;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,6 +42,8 @@ public class MainController implements Initializable {
     private TableColumn<Item, String> columnPrecioProducto;
     @javafx.fxml.FXML
     private TableColumn<Item, String> columnCantidad;
+    @javafx.fxml.FXML
+    private TableColumn<Product, Void> columnAction;
 
     @javafx.fxml.FXML
     public void logout(Event event) {
@@ -62,8 +66,9 @@ public class MainController implements Initializable {
         // Configuración inicial de la vista
         txtUsuario.setText(txtUsuario.getText() + Session.getCurrentUser().getName());
         ObservableList<Item> items = tableItem.getItems();
+        ObservableList<Order> orders = table.getItems();
 
-        table.getItems().addAll(Session.getCurrentUser().getOrders());
+        orders.addAll(Session.getCurrentUser().getOrders());
 
         // Configuración de las columnas de la tabla de pedidos
         columnFecha.setCellValueFactory((fila) -> {
@@ -106,5 +111,57 @@ public class MainController implements Initializable {
             return new SimpleStringProperty(total);
         });
 
+        columnAction.setCellFactory(param -> new TableCell<Product, Void>() {
+            private final Button btnEliminar = new Button();
+            private final Button btnEditar = new Button();
+
+            {
+                // Configurar imágenes para botones
+                ImageView eliminarImage = new ImageView(new Image("C:\\Users\\gabri\\IdeaProjects\\PedidosHibernate\\src\\main\\resources\\img\\borrar.png"));
+                eliminarImage.setFitWidth(25);
+                eliminarImage.setFitHeight(25);
+                btnEliminar.setGraphic(eliminarImage);
+                btnEliminar.setOnAction(event -> {
+                    Order orderSelected = table.getItems().get(getIndex());
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmación");
+                    alert.setHeaderText("¿Estas seguro de que quieres borrar el pedido: " + orderSelected.getCode() + "?");
+                    alert.setContentText("Presiona aceptar para eliminar el pedido");
+                    alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+                    alert.showAndWait().ifPresent((response) -> {
+                        if (response == ButtonType.OK) {
+                            var miDao = new OrderDAO();
+                            miDao.delete(orderSelected);
+                            orders.remove(orderSelected);
+                        }
+                    });
+                });
+
+                ImageView editarImage = new ImageView(new Image("C:\\Users\\gabri\\IdeaProjects\\PedidosHibernate\\src\\main\\resources\\img\\lapiz.png"));
+                editarImage.setFitHeight(25);
+                editarImage.setFitWidth(25);
+                btnEditar.setGraphic(editarImage);
+                btnEditar.setOnAction(event -> {
+                    Order order = table.getItems().get(getIndex());
+                    Session.setCurrentOrder(order);
+                    App.changeScene("update-view.fxml");
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    // Añadir botones a la celda
+                    HBox hbox = new HBox(btnEliminar,btnEditar);
+                    hbox.setSpacing(20);
+                    setGraphic(hbox);
+                }
+            }
+        });
+
     }
+
 }
