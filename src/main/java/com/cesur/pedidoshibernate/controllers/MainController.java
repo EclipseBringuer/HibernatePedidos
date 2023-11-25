@@ -8,6 +8,7 @@ import com.cesur.pedidoshibernate.domain.entities.order.OrderDAO;
 import com.cesur.pedidoshibernate.domain.entities.product.Product;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -44,21 +45,12 @@ public class MainController implements Initializable {
     private TableColumn<Item, String> columnCantidad;
     @javafx.fxml.FXML
     private TableColumn<Product, Void> columnAction;
+    @javafx.fxml.FXML
+    private Button btnMake;
 
     @javafx.fxml.FXML
     public void logout(Event event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
-        alert.setHeaderText("¿Estas seguro de que quieres salir?");
-        alert.setContentText("Presiona aceptar para cerrar sesión");
-        alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
-        alert.showAndWait().ifPresent((response) -> {
-            if (response == ButtonType.OK) {
-                Session.setCurrentUser(null);
-                Session.setCurrentOrder(null);
-                App.changeScene("login-view.fxml");
-            }
-        });
+       App.logout();
     }
 
     @Override
@@ -144,7 +136,7 @@ public class MainController implements Initializable {
                 btnEditar.setOnAction(event -> {
                     Order order = table.getItems().get(getIndex());
                     Session.setCurrentOrder(order);
-                    App.changeScene("update-view.fxml");
+                    App.changeScene("order-view.fxml");
                 });
             }
 
@@ -164,4 +156,8 @@ public class MainController implements Initializable {
 
     }
 
+    @javafx.fxml.FXML
+    public void makeOrder(ActionEvent actionEvent) {
+        App.changeScene("order-view.fxml");
+    }
 }

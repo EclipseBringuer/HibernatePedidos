@@ -20,6 +20,28 @@ public class Product implements Serializable {
     @Column(name = "cantidad")
     private Integer amount;
 
+    @Column(name = "descripcion")
+    private String description;
+
+    @Column(name = "imagen")
+    private String image;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -59,6 +81,8 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", price='" + price + '\'' +
                 ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

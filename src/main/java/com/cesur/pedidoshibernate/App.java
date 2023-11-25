@@ -6,6 +6,8 @@ import com.cesur.pedidoshibernate.domain.entities.user.UserDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -42,5 +44,20 @@ public class App extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void logout(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("¿Estas seguro de que quieres salir?");
+        alert.setContentText("Presiona aceptar para cerrar sesión");
+        alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+        alert.showAndWait().ifPresent((response) -> {
+            if (response == ButtonType.OK) {
+                Session.setCurrentUser(null);
+                Session.setCurrentOrder(null);
+                App.changeScene("login-view.fxml");
+            }
+        });
     }
 }
