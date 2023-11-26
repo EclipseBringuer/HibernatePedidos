@@ -24,20 +24,22 @@ public class ProductWrapper extends VBox {
 
         // Configuración de la imagen del producto
         ImageView image = new ImageView(new Image(this.product.getImage()));
-        image.setFitHeight(100);
-        image.setFitWidth(100);
+        image.setFitHeight(120);
+        image.setFitWidth(120);
 
         // Etiqueta para el nombre del producto
         Label title = new Label(this.product.getName());
+        title.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
 
         // Etiqueta para el precio del producto
         Label price = new Label(this.product.getPrice() + " €");
+        price.setStyle("-fx-font-size: 14; -fx-text-fill: #00A86B; -fx-font-weight: bold");
 
         // Añadir nodos al contenedor VBox
         this.getChildren().addAll(image, title, price);
 
         // Configuración del tamaño preferido del contenedor
-        this.setPrefSize(200, 100);
+        this.setPrefSize(200, 120);
 
         // Añadir una clase de estilo al contenedor (para darle estilo y personalizarlo)
         this.getStyleClass().add("contenedor");
