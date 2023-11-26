@@ -108,7 +108,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Spinner fx:id="units" prefWidth="70.0" />
+                                    <Spinner fx:id="units" editable="true" prefWidth="70.0" />
                                  </children>
                               </HBox>
                               <Label fx:id="labelUnits" text="Precio con">

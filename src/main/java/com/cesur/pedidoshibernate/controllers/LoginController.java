@@ -16,6 +16,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de inicio de sesión.
+ */
 public class LoginController implements Initializable {
 
     @FXML
@@ -27,6 +30,11 @@ public class LoginController implements Initializable {
     @FXML
     private Label txtRegistrate;
 
+    /**
+     * Intenta iniciar sesión con las credenciales proporcionadas. Muestra un mensaje de error si las credenciales son incorrectas.
+     *
+     * @param actionEvent El evento que desencadenó el intento de inicio de sesión.
+     */
     @FXML
     public void logear(ActionEvent actionEvent) {
         var userDAO = new UserDAO();
@@ -44,14 +52,24 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * Cambia la escena a la vista de registro.
+     *
+     * @param event El evento que desencadenó el cambio de escena.
+     */
     @FXML
     public void cargarRegistro(Event event) {
         App.changeScene("regist-view.fxml");
     }
 
+    /**
+     * Inicializa la vista de inicio de sesión con valores predeterminados.
+     *
+     * @param url            La ubicación relativa del archivo FXML.
+     * @param resourceBundle El paquete de recursos para la internacionalización.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtCorreo.setText("gabrielrl2004@gmail.com");
-        txtPass.setText("15112004");
+
     }
 }

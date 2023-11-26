@@ -11,9 +11,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * La clase App es la clase principal de la aplicación que extiende Application de JavaFX.
+ * Contiene métodos para iniciar la aplicación, cambiar la escena y gestionar el cierre de sesión.
+ */
 public class App extends Application {
+    // Representa el escenario principal de la aplicación
     private static Stage myStage;
 
+    /**
+     * Método principal que inicia la aplicación.
+     *
+     * @param args Los argumentos de línea de comandos (no se utilizan en este caso).
+     */
     @Override
     public void start(Stage stage) throws IOException {
         var productDao = new ProductDAO();
@@ -27,10 +37,21 @@ public class App extends Application {
         myStage.show();
     }
 
+    /**
+     * Inicia la aplicación y carga la escena de inicio.
+     *
+     * @param stage El escenario principal de la aplicación.
+     * @throws IOException Si hay un error al cargar el archivo FXML.
+     */
     public static void main(String[] args) {
         launch();
     }
 
+    /**
+     * Cambia la escena actual por la indicada por el archivo FXML proporcionado.
+     *
+     * @param fxml El nombre del archivo FXML de la nueva escena.
+     */
     public static void changeScene(String fxml) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml));
@@ -42,6 +63,10 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Cierra la sesión actual del usuario, mostrando un cuadro de diálogo de confirmación.
+     * Si el usuario confirma, se restablecen las variables de sesión y se cambia a la escena de inicio de sesión.
+     */
     public static void logout(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");

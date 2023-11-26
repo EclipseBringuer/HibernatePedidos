@@ -23,6 +23,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de pedidos.
+ */
 public class OrderViewController implements Initializable {
 
     @javafx.fxml.FXML
@@ -65,6 +68,12 @@ public class OrderViewController implements Initializable {
     private ImageView image;
     private Order newOrder;
 
+    /**
+     * Inicializa la vista del pedido.
+     *
+     * @param url            La URL relativa al archivo FXML.
+     * @param resourceBundle El recurso de la interfaz de usuario.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Vinculacion de el observable y la tabla
@@ -145,7 +154,11 @@ public class OrderViewController implements Initializable {
         }
     }
 
-    //Metodo para renderizar los productos de la lista
+    /**
+     * Crea una vista para un producto en la interfaz de usuario y la agrega al contenedor de productos.
+     *
+     * @param p El producto para el cual se creará la vista.
+     */
     private void makeProductViewer(Product p) {
         ProductWrapper pw = new ProductWrapper(p);
         pw.setOnMouseClicked(event -> {
@@ -158,13 +171,21 @@ public class OrderViewController implements Initializable {
         container.getChildren().add(pw);
     }
 
-    //Metodo para hacer logout
+    /**
+     * Realiza el cierre de sesión, redirigiendo a la aplicación al inicio de sesión.
+     *
+     * @param event El evento que desencadenó el cierre de sesión.
+     */
     @javafx.fxml.FXML
     public void logout(Event event) {
         App.logout();
     }
 
-    //Metodo para volver a la pantalla main
+    /**
+     * Regresa a la pantalla principal, mostrando una confirmación si el pedido actual está vacío.
+     *
+     * @param actionEvent El evento que desencadenó el retorno a la pantalla principal.
+     */
     @javafx.fxml.FXML
     public void returnToMain(ActionEvent actionEvent) {
         if (Session.getCurrentOrder().getItems().isEmpty()) {
@@ -189,7 +210,12 @@ public class OrderViewController implements Initializable {
         }
     }
 
-    //Metodo para actualizar el contador de precio total
+    /**
+     * Actualiza el contador del precio total basado en los elementos de la tabla.
+     *
+     * @param items La lista de elementos que contribuyen al precio total.
+     * @return El nuevo precio total después de la actualización.
+     */
     private Integer updateTotal(List<Item> items) {
         int precioTotal = 0;
         for (Item i : items) {
@@ -199,7 +225,11 @@ public class OrderViewController implements Initializable {
         return precioTotal;
     }
 
-    //Metodo para añadir un item a la tabla
+    /**
+     * Añade un nuevo item a la tabla de pedidos, actualizando el precio total.
+     *
+     * @param actionEvent El evento que desencadenó la adición de un nuevo item.
+     */
     @javafx.fxml.FXML
     public void addItem(ActionEvent actionEvent) {
         if (currentProduct != null) {
@@ -230,6 +260,12 @@ public class OrderViewController implements Initializable {
 
     }
 
+    /**
+     * Guarda los cambios realizados en el pedido actual, actualizando la lista de ítems y el precio total.
+     * Utiliza el objeto OrderDAO para actualizar la información en la base de datos.
+     *
+     * @param actionEvent El evento de acción que desencadenó este método.
+     */
     @javafx.fxml.FXML
     public void saveOrder(ActionEvent actionEvent) {
         var orderDao = new OrderDAO();
