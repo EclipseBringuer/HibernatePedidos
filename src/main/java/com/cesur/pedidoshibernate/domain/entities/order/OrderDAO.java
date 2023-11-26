@@ -22,12 +22,28 @@ public class OrderDAO implements DAO<Order> {
 
     @Override
     public Order save(Order data) {
-        return null;
+        Order exit = null;
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction t = s.beginTransaction();
+            data.setCode(generateNewCode());
+            s.persist(data);
+            t.commit();
+            exit = data;
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exit;
     }
 
     @Override
     public void update(Order data) {
 
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction t = s.beginTransaction();
+            s.merge(data);
+            t.commit();
+        }
     }
 
     @Override
@@ -37,5 +53,21 @@ public class OrderDAO implements DAO<Order> {
             Order order = s.get(Order.class, data.getId());
             s.remove(order);
         });
+    }
+
+    private String generateNewCode() {
+        String newCode = null;
+        try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+            String lastCode = "";
+            Query<String> q = s.createQuery("SELECT max(o.code) from Order o", String.class);
+            lastCode = q.getSingleResult();
+            int newNumber = 1;
+            if (lastCode != null) {
+                String numberStr = lastCode.substring(4);
+                newNumber = Integer.parseInt(numberStr) + 1;
+            }
+            newCode = String.format("PED-%03d",newNumber);
+        }
+        return newCode;
     }
 }

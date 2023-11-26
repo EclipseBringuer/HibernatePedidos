@@ -125,7 +125,7 @@
                   <TableView fx:id="tableItem" prefHeight="200.0" prefWidth="200.0" styleClass="tabla" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="columnProducto" prefWidth="75.0" styleClass="custom-header" text="Producto" />
-                      <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" styleClass="custom-header" text="Precio" />
+                      <TableColumn fx:id="columnPrecioProducto" prefWidth="75.0" styleClass="custom-header" text="Precio por unidad" />
                         <TableColumn fx:id="columnCantidad" prefWidth="75.0" styleClass="custom-header" text="Cantidad" />
                     </columns>
                      <VBox.margin>

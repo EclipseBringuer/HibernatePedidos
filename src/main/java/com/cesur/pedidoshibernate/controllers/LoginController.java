@@ -2,6 +2,8 @@ package com.cesur.pedidoshibernate.controllers;
 
 import com.cesur.pedidoshibernate.App;
 import com.cesur.pedidoshibernate.Session;
+import com.cesur.pedidoshibernate.domain.entities.product.Product;
+import com.cesur.pedidoshibernate.domain.entities.product.ProductDAO;
 import com.cesur.pedidoshibernate.domain.entities.user.User;
 import com.cesur.pedidoshibernate.domain.entities.user.UserDAO;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -36,6 +39,7 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         } else {
             Session.setCurrentUser(user);
+            Session.setCurrentOrderList(user.getOrders());
             App.changeScene("main-view.fxml");
         }
     }

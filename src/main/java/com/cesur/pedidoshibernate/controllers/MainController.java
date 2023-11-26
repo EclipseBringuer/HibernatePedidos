@@ -15,7 +15,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import org.hibernate.query.Query;
+
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -50,7 +53,7 @@ public class MainController implements Initializable {
 
     @javafx.fxml.FXML
     public void logout(Event event) {
-       App.logout();
+        App.logout();
     }
 
     @Override
@@ -60,7 +63,7 @@ public class MainController implements Initializable {
         ObservableList<Item> items = tableItem.getItems();
         ObservableList<Order> orders = table.getItems();
 
-        orders.addAll(Session.getCurrentUser().getOrders());
+        orders.addAll(Session.getCurrentOrderList());
 
         // Configuración de las columnas de la tabla de pedidos
         columnFecha.setCellValueFactory((fila) -> {
@@ -99,7 +102,7 @@ public class MainController implements Initializable {
         });
 
         columnPrecioProducto.setCellValueFactory((fila) -> {
-            String total = fila.getValue().getProduct().getPrice();
+            String total = fila.getValue().getProduct().getPrice() + " €";
             return new SimpleStringProperty(total);
         });
 
@@ -113,6 +116,7 @@ public class MainController implements Initializable {
                 eliminarImage.setFitWidth(25);
                 eliminarImage.setFitHeight(25);
                 btnEliminar.setGraphic(eliminarImage);
+                //Funcion del boton eliminar
                 btnEliminar.setOnAction(event -> {
                     Order orderSelected = table.getItems().get(getIndex());
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -124,6 +128,7 @@ public class MainController implements Initializable {
                         if (response == ButtonType.OK) {
                             var miDao = new OrderDAO();
                             miDao.delete(orderSelected);
+                            Session.getCurrentOrderList().remove(orderSelected);
                             orders.remove(orderSelected);
                         }
                     });
@@ -133,9 +138,10 @@ public class MainController implements Initializable {
                 editarImage.setFitHeight(25);
                 editarImage.setFitWidth(25);
                 btnEditar.setGraphic(editarImage);
+                //Funcion del boton editar
                 btnEditar.setOnAction(event -> {
-                    Order order = table.getItems().get(getIndex());
-                    Session.setCurrentOrder(order);
+                    Order orderSelected = table.getItems().get(getIndex());
+                    Session.setCurrentOrder(orderSelected);
                     App.changeScene("order-view.fxml");
                 });
             }
@@ -147,7 +153,7 @@ public class MainController implements Initializable {
                     setGraphic(null);
                 } else {
                     // Añadir botones a la celda
-                    HBox hbox = new HBox(btnEliminar,btnEditar);
+                    HBox hbox = new HBox(btnEliminar, btnEditar);
                     hbox.setSpacing(20);
                     setGraphic(hbox);
                 }
@@ -158,6 +164,16 @@ public class MainController implements Initializable {
 
     @javafx.fxml.FXML
     public void makeOrder(ActionEvent actionEvent) {
+        var orderDao = new OrderDAO();
+        Order order = new Order();
+        order.setUser(Session.getCurrentUser());
+        LocalDate currentDate = LocalDate.now();
+        order.setDate(String.valueOf(currentDate));
+        order.setPrice(0);
+        order = orderDao.save(order);
+        Session.getCurrentOrderList().add(order);
+        Session.setCurrentOrder(order);
         App.changeScene("order-view.fxml");
     }
+
 }

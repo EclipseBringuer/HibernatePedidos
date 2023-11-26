@@ -16,7 +16,7 @@ public class Order implements Serializable {
     private Integer id;
 
     @Column(name = "codigo")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String code;
 
     @Column(name = "fecha")
@@ -29,7 +29,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_usuario")
     private User user;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
     public Integer getId() {

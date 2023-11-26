@@ -15,7 +15,7 @@ public class ProductWrapper extends VBox {
         image.setFitHeight(100);
         image.setFitWidth(100);
         Label title = new Label(this.product.getName());
-        Label price = new Label(this.product.getPrice());
+        Label price = new Label(this.product.getPrice() + " €");
         //Label description = new Label(this.product.getDescription());
         this.getChildren().addAll(image, title, price/* description*/);
         this.setPrefSize(200, 100);

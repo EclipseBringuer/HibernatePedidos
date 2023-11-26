@@ -3,6 +3,7 @@ package com.cesur.pedidoshibernate.domain.entities.product;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "producto")
@@ -15,7 +16,7 @@ public class Product implements Serializable {
     private String name;
 
     @Column(name = "precio")
-    private String price;
+    private Integer price;
 
     @Column(name = "cantidad")
     private Integer amount;
@@ -58,11 +59,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -84,5 +85,13 @@ public class Product implements Serializable {
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(amount, product.amount) && Objects.equals(description, product.description) && Objects.equals(image, product.image);
     }
 }
