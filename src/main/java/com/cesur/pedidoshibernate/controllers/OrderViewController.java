@@ -77,18 +77,10 @@ public class OrderViewController implements Initializable {
         });
         //
 
-        if (Session.getCurrentOrder() != null) {
-            items.addAll(Session.getCurrentOrder().getItems());
-            labelPed.setText(labelPed.getText() + " " + Session.getCurrentOrder().getCode());
-            btnSaveOrder.setText("Actualizar pedido");
-            updateTotal(items);
-        } else {
-            //TODO cambiar esto, es innecesario
-            newOrder = new Order();
-            Session.setCurrentOrder(newOrder);
-            btnSaveOrder.setText("Guardar pedido");
-            labelTotal.setText(labelTotal.getText() + " 0 €");
-        }
+        items.addAll(Session.getCurrentOrder().getItems());
+        labelPed.setText(labelPed.getText() + " " + Session.getCurrentOrder().getCode());
+        btnSaveOrder.setText("Guardar cambios");
+        updateTotal(items);
 
         cName.setCellValueFactory((row) -> {
             String name = row.getValue().getProduct().getName();
@@ -212,11 +204,7 @@ public class OrderViewController implements Initializable {
     public void addItem(ActionEvent actionEvent) {
         if (currentProduct != null) {
             Item item = new Item();
-            if (Session.getCurrentOrder() != null) {
-                item.setOrder(Session.getCurrentOrder());
-            } else {
-
-            }
+            item.setOrder(Session.getCurrentOrder());
             item.setAmount(units.getValue());
             item.setProduct(currentProduct);
             boolean found = false;

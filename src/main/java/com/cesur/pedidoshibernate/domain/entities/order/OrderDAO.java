@@ -38,7 +38,6 @@ public class OrderDAO implements DAO<Order> {
 
     @Override
     public void update(Order data) {
-
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             Transaction t = s.beginTransaction();
             s.merge(data);
