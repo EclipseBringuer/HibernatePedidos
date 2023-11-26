@@ -21,8 +21,6 @@ public class App extends Application {
 
     /**
      * Método principal que inicia la aplicación.
-     *
-     * @param args Los argumentos de línea de comandos (no se utilizan en este caso).
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,9 +37,6 @@ public class App extends Application {
 
     /**
      * Inicia la aplicación y carga la escena de inicio.
-     *
-     * @param stage El escenario principal de la aplicación.
-     * @throws IOException Si hay un error al cargar el archivo FXML.
      */
     public static void main(String[] args) {
         launch();
